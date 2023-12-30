@@ -7,6 +7,7 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { NavList } from "@/constants/NavList";
 import Link from "next/link";
+import Logo from "../Logo/Logo";
 
 const Navbar = () => {
   // get current path
@@ -22,15 +23,7 @@ const Navbar = () => {
           <div className="common">
             <div className="flex h-16 justify-between items-center">
               <div className="flex px-2 lg:px-0">
-                <div className="flex flex-shrink-0 items-center">
-                  {/* Title - Quizzes */}
-
-                  <Link href="/">
-                    <span className="text-2xl font-bold text-indigo-600 font-serif">
-                      Quizzes
-                    </span>
-                  </Link>
-                </div>
+                <Logo />
                 <div className="hidden lg:ml-6 lg:flex lg:space-x-8 items-center">
                   {NavList.map((item, i) => (
                     <Link key={i} href={item.path}>
@@ -45,6 +38,7 @@ const Navbar = () => {
                       </span>
                     </Link>
                   ))}
+                  Lo
                 </div>
               </div>
               <div className="flex flex-1 items-center justify-center px-2 lg:ml-6 lg:justify-end">
@@ -153,7 +147,7 @@ const Navbar = () => {
                 </div>
               ) : (
                 <Link href="/login" className="hidden md:block">
-                  <span className="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-400">
+                  <span className="rounded-full border-2 border-indigo-600 px-6 py-1 text-indigo-600 transition-colors hover:bg-indigo-600 hover:text-white">
                     Login
                   </span>
                 </Link>
