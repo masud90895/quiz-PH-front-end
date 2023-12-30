@@ -26,7 +26,7 @@ const Navbar = () => {
                   {/* Title - Quizzes */}
 
                   <Link href="/">
-                    <span className="text-2xl font-bold text-indigo-600">
+                    <span className="text-2xl font-bold text-indigo-600 font-serif">
                       Quizzes
                     </span>
                   </Link>
