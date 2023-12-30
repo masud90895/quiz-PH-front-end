@@ -9,7 +9,7 @@ const Logo = () => {
       href="/"
       className="flex cursor-pointer items-center whitespace-nowrap text-2xl font-black "
     >
-      <span className="mr-2 text-4xl text-indigo-500">
+      <span className="mr-2 text-4xl text-blue-500">
         <Image
           src={logoImg}
           alt="Quizzes logo"
