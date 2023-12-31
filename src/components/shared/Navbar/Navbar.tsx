@@ -19,7 +19,7 @@ const Navbar = () => {
   // const isLoggedIn = false;
 
   const isLoggedIn = getUserDataFromLC();
-  console.log("🚀 ~ file: Navbar.tsx:21 ~ Navbar ~ isLoggedIn:", isLoggedIn);
+  
 
   const handleLogout = async () => {
     await logout();

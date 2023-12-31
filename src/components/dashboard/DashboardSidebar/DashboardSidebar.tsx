@@ -1,7 +1,13 @@
-import Image from 'next/image';
-import React from 'react';
+"use client";
+import Logo from "@/components/shared/Logo/Logo";
+import { IUser } from "@/interfaces/IUser";
+import { getUserDataFromLC } from "@/utils/local-storage";
+import Image from "next/image";
+import React from "react";
 
 const DashboardSidebar = () => {
+  const user: IUser | null = getUserDataFromLC();
+
   return (
     <aside className="fixed z-50 md:relative">
       {/* <!-- Sidebar --> */}
@@ -30,12 +36,7 @@ const DashboardSidebar = () => {
         className="peer-checked:w-64 left-0 z-10 flex h-screen w-0 flex-col overflow-hidden bg-gray-700 text-white transition-all md:h-screen md:w-64 lg:w-72"
       >
         <div className="bg-slate-800 mt-5 py-4 pl-10 md:mt-10">
-          <span className="">
-            <span className="mr-1 inline-flex h-8 w-8 items-center justify-center rounded-full bg-blue-600 align-bottom text-2xl font-bold">
-              U
-            </span>
-            <span className="text-xl">rbane</span>
-          </span>
+          <Logo />
         </div>
         <ul className="mt-8 space-y-3 md:mt-20">
           <li className="relative">
@@ -192,19 +193,19 @@ const DashboardSidebar = () => {
           </li>
         </ul>
 
-        <div className="my-6 mt-auto ml-10 flex cursor-pointer">
+        <div className="my-6 mt-auto ml-10 flex cursor-pointer items-center">
           <div>
             <Image
               className="h-12 w-12 rounded-full"
-              src="https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+              src="https://i.ibb.co/k53Qz5y/png-transparent-avatar-user-computer-icons-software-developer-avatar-child-face-heroes-thumbnail.png"
               alt="Profile picture"
               width={48}
               height={48}
             />
           </div>
           <div className="ml-3">
-            <p className="font-medium">Diana Reeves</p>
-            <p className="text-sm text-gray-300">Kyiv, Ukraine</p>
+            <p className="font-medium">{user?.name}</p>
+            <p className="text-sm text-gray-300">{user?.email}</p>
           </div>
         </div>
       </nav>
