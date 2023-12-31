@@ -1,8 +1,20 @@
+"use client";
+import InputField from "@/components/InputField/InputField";
 import Logo from "@/components/shared/Logo/Logo";
 import Link from "next/link";
 import React from "react";
+import { useForm } from "react-hook-form";
 
 const Login = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+  const onSubmit = (data: any) => {
+    console.log(data);
+  };
+
   return (
     <div className="flex min-h-screen  w-full items-center justify-center text-gray-600 bg-gray-50">
       <div className="relative">
@@ -85,48 +97,32 @@ const Login = () => {
               Please sign-in to access your account
             </p>
 
-            <form id="" className="mb-4" action="#" method="POST">
-              <div className="mb-4">
-                <label
-                  htmlFor="email"
-                  className="mb-2 inline-block text-xs font-medium uppercase text-gray-700"
-                >
-                  Email or Username
-                </label>
-                <input
-                  type="text"
-                  className="block w-full cursor-text appearance-none rounded-md border border-gray-400 bg--100 py-2 px-3 text-sm outline-none focus:border-blue-500 focus:bg-white focus:text-gray-600 focus:shadow"
-                  id="email"
-                  name="email-username"
+            <form onSubmit={handleSubmit(onSubmit)} className="mb-4">
+              <div className="mb-2">
+                <InputField
+                  label="Email or Username"
+                  name="email"
                   placeholder="Enter your email or username"
+                  type="email"
+                  register={register}
+                  errors={errors}
+                  required
                 />
               </div>
+
               <div className="mb-4">
-                <div className="flex justify-between">
-                  <label
-                    className="mb-2 inline-block text-xs font-medium uppercase text-gray-700"
-                    htmlFor="password"
-                  >
-                    Password
-                  </label>
-                  <a
-                    href="auth-forgot-password-basic.html"
-                    className="cursor-pointer text-blue-500 no-underline hover:text-blue-500"
-                  >
-                    <small className=" ">Forgot Password?</small>
-                  </a>
-                </div>
-                <div className="relative flex w-full flex-wrap items-stretch">
-                  <input
-                    type="password"
-                    id="password"
-                    className="relative block flex-auto cursor-text appearance-none rounded-md border border-gray-400 bg--100 py-2 px-3 text-sm outline-none focus:border-blue-500 focus:bg-white focus:text-gray-600 focus:shadow"
-                    name="password"
-                    placeholder="············"
-                  />
-                </div>
+                <InputField
+                  label="Password"
+                  name="password"
+                  placeholder="Enter your password"
+                  type="password"
+                  register={register}
+                  errors={errors}
+                  required
+                />
               </div>
-              <div className="mb-4">
+
+              <div className="mb-4 flex items-center justify-between w-full">
                 <div className="block">
                   <input
                     className="mt-1 mr-2 h-5 w-5 appearance-none rounded border border-gray-300 bg-contain bg-no-repeat align-top text-black shadow checked:bg-blue-500 focus:border-blue-500 focus:shadow"
@@ -146,6 +142,13 @@ const Login = () => {
                     Remember Me{" "}
                   </label>
                 </div>
+
+                <a
+                  href="auth-forgot-password-basic.html"
+                  className="cursor-pointer text-blue-500 no-underline hover:text-blue-500"
+                >
+                  <small className=" ">Forgot Password?</small>
+                </a>
               </div>
               <div className="mb-4">
                 <button
