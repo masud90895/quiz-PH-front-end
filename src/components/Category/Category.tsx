@@ -1,16 +1,10 @@
-import config from "@/config/config";
+"use client";
+import { useCategoryDropdownQuery } from "@/redux/api/categoryApi";
 import Link from "next/link";
 import React from "react";
 
-// fetch category
-async function fetchCategory() {
-  const res = await fetch(`${config.apiBaseUrl}/category/dropdown`);
-  const data = await res.json();
-  return data;
-}
-
-const Category = async () => {
-  const categories = await fetchCategory();
+const Category = () => {
+  const { data } = useCategoryDropdownQuery(undefined);
 
   return (
     <section className="my-[50px]">
@@ -18,7 +12,7 @@ const Category = async () => {
         {/* <!-- Heading Div --> */}
         <div className="mx-auto w-full max-w-3xl text-center">
           <h2 className="text-3xl font-semibold md:text-5xl">
-            All{" "}
+            {" "}
             <span
               className="bg-cover bg-center bg-no-repeat px-4 text-white"
               style={{
@@ -38,7 +32,7 @@ const Category = async () => {
         {/* <!-- Features Div --> */}
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-8 md:grid-cols-3 lg:grid-cols-4">
           {/* <!-- Feature Item --> */}
-          {categories?.data?.map(
+          {data?.map(
             (
               category: {
                 id: number;

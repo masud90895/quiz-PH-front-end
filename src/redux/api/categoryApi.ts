@@ -1,3 +1,4 @@
+
 import { tagTypes } from "../features/tag-types";
 import { baseApi } from "./baseApi";
 
@@ -32,6 +33,15 @@ export const categoryApi = baseApi.injectEndpoints({
     }),
     // score api
 
+    // get all category for dropdown
+    categoryDropdown: build.query({
+      query: () => ({
+        url: `${CATEGORY_URL}/dropdown`,
+        method: "GET",
+      }),
+      providesTags: [tagTypes.category],
+    }),
+
     // delete category
     deleteCategory: build.mutation({
       query: (id) => ({
@@ -50,8 +60,6 @@ export const categoryApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: [tagTypes.category],
     }),
-
-    
   }),
 });
 
@@ -61,4 +69,5 @@ export const {
   useCategoryQuery,
   useDeleteCategoryMutation,
   useUpdateCategoryMutation,
+  useCategoryDropdownQuery,
 } = categoryApi;

@@ -1,8 +1,5 @@
 "use client";
 import React from "react";
-import LogoImage from "../../../../public/assets/idea.jpg";
-import Image from "next/image";
-import CoverImage from "../../../../public//assets/6580907.jpg";
 import { useQuizzesQuery } from "@/redux/api/quizApi";
 import QuizCard from "@/components/QuizCard/QuizCard";
 import Loader from "../../loading";
