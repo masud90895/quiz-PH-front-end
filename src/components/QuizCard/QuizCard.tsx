@@ -3,6 +3,7 @@ import React from "react";
 
 type QuizCardProps = {
   quiz: {
+    id: string;
     categoryId: string;
     title: string;
     category: { name: string };
@@ -90,7 +91,7 @@ const QuizCard = ({ quiz }: QuizCardProps) => {
         <p className="mb-[8px]"> Questions: {quiz?.questions?.length}</p>
         {/* quiz image */}
         <Link
-          href={`/quizzes/${quiz?.categoryId}`}
+          href={`/quizzes/${quiz?.id}`}
           className={
             "group flex w-full cursor-pointer items-center justify-center rounded-md bg-blue-700 px-6 py-2 text-white transition"
           }

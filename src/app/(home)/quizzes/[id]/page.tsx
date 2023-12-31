@@ -1,14 +1,18 @@
+"use client";
 import Loader from "@/app/loading";
+import QuizForm from "@/components/QuizForm/QuizForm";
 import { useQuizQuery } from "@/redux/api/quizApi";
 import React from "react";
 
 const QuizPage = ({ params }: any) => {
-  console.log(params);
   const { data, isLoading } = useQuizQuery(params.id);
-  console.log(data);
 
   if (isLoading) return <Loader />;
-  return <div className="common"></div>;
+  return (
+    <div className="common">
+      <QuizForm quiz={data} />{" "}
+    </div>
+  );
 };
 
 export default QuizPage;
