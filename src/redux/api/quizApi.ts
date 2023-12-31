@@ -2,6 +2,7 @@ import { tagTypes } from "../features/tag-types";
 import { baseApi } from "./baseApi";
 
 const quiz_url = "/quizzes";
+const question_url = "/questions";
 
 export const quizApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
@@ -53,39 +54,39 @@ export const quizApi = baseApi.injectEndpoints({
     // quiz questions
     createQuizQuestion: build.mutation({
       query: (payload) => ({
-        url: `${quiz_url}/question`,
+        url: `${question_url}`,
         method: "POST",
         data: payload,
       }),
       invalidatesTags: [tagTypes.question],
     }),
 
+    // get all quiz questions
+    getAllQuestions: build.query({
+      query: () => ({
+        url: `${question_url}`,
+        method: "GET",
+      }),
+      providesTags: [tagTypes.question],
+    }),
+
     //update quiz question
     updateQuizQuestion: build.mutation({
-      query: (payload) => ({
-        url: `${quiz_url}/question/${payload.id}`,
+      query: ({ id, ...payload }) => ({
+        url: `${question_url}/${id}`,
         method: "PATCH",
-        data: payload.data,
+        data: payload,
       }),
       invalidatesTags: [tagTypes.question],
     }),
 
-    //get LastQuiz Questions by quiz id
-    getLastQuizQuestions: build.query({
+    // delete quiz question
+    deleteQuizQuestion: build.mutation({
       query: (id) => ({
-        url: `${quiz_url}/question/${id}`,
-        method: "GET",
+        url: `${question_url}/${id}`,
+        method: "DELETE",
       }),
-      providesTags: [tagTypes.question],
-    }),
-
-    // get Question by id
-    getQuestionById: build.query({
-      query: (id) => ({
-        url: `${quiz_url}/question-id/${id}`,
-        method: "GET",
-      }),
-      providesTags: [tagTypes.question],
+      invalidatesTags: [tagTypes.question],
     }),
   }),
 });
@@ -97,7 +98,7 @@ export const {
   useUpdateQuizMutation,
   useDeleteQuizMutation,
   useCreateQuizQuestionMutation,
+  useGetAllQuestionsQuery,
   useUpdateQuizQuestionMutation,
-  useGetLastQuizQuestionsQuery,
-  useGetQuestionByIdQuery,
+  useDeleteQuizQuestionMutation,
 } = quizApi;

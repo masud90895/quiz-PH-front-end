@@ -51,30 +51,7 @@ export const categoryApi = baseApi.injectEndpoints({
       invalidatesTags: [tagTypes.category],
     }),
 
-    addQuizScore: build.mutation({
-      query: (payload) => ({
-        url: `/score`,
-        method: "POST",
-        data: payload,
-      }),
-      invalidatesTags: [tagTypes.score],
-    }),
-    // scores
-    scores: build.query({
-      query: () => ({
-        url: `/score`,
-        method: "GET",
-      }),
-      providesTags: [tagTypes.score],
-    }),
-    // score
-    score: build.query({
-      query: (id) => ({
-        url: `/score/${id}`,
-        method: "GET",
-      }),
-      providesTags: [tagTypes.score],
-    }),
+    
   }),
 });
 
@@ -84,8 +61,4 @@ export const {
   useCategoryQuery,
   useDeleteCategoryMutation,
   useUpdateCategoryMutation,
-
-  useAddQuizScoreMutation,
-  useScoresQuery,
-  useScoreQuery,
 } = categoryApi;

@@ -6,9 +6,6 @@ import Table from "@/components/Table/Table";
 import Modal from "@/components/modal/Modal";
 import {
   useCategoriesQuery,
-  useCreateCategoryMutation,
-  useDeleteCategoryMutation,
-  useUpdateCategoryMutation,
 } from "@/redux/api/categoryApi";
 import {
   useCreateQuizMutation,
