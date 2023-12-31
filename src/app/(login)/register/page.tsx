@@ -8,7 +8,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React from "react";
 import { useForm } from "react-hook-form";
-import toast from "react-hot-toast";
+import Swal from "sweetalert2";
 
 const Register = () => {
   const [userSingUp, { isLoading }] = useUserSingUpMutation();
@@ -27,13 +27,24 @@ const Register = () => {
       const res = await userSingUp(data).unwrap();
       console.log(res);
       if (res?.newUser && res?.accessToken) {
-        toast.success("User created successfully");
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "User created successfully",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+
         setToLocalStorage("token", res?.accessToken);
         router.push("/");
       }
     } catch (error: any) {
       console.log(error);
-      toast.error(error?.data?.message);
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: `${error}`,
+      });
     }
   };
 

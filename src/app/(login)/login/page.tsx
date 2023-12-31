@@ -8,7 +8,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React from "react";
 import { useForm } from "react-hook-form";
-import toast from "react-hot-toast";
+import Swal from "sweetalert2";
 
 const Login = () => {
   const [userSingIn, { isLoading }] = useUserSingInMutation();
@@ -23,13 +23,23 @@ const Login = () => {
       const res = await userSingIn(data).unwrap();
       console.log(res);
       if (res?.accessToken) {
-        toast.success("User logged in successfully");
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Login Successfully",
+          showConfirmButton: false,
+          timer: 1500,
+        });
         setToLocalStorage("token", res?.accessToken);
         router.push("/");
       }
     } catch (error: any) {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: `${error}`,
+      });
       console.log(error);
-      toast.error(error);
     }
   };
 

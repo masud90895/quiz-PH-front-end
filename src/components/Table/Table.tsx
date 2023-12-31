@@ -17,7 +17,6 @@ type Props = {
   title: string;
   setSearch?: (value: string) => void;
   setCreateModal?: (value: boolean) => void;
-  createModal?: boolean;
   tableHeader: ITableHeader[];
   tableData: ITableData[];
   isLoading?: boolean;
@@ -29,7 +28,7 @@ const Table = ({
   title,
   setSearch,
   setCreateModal,
-  createModal,
+
   tableHeader,
   tableData,
   isLoading = false,

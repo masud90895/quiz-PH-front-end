@@ -41,8 +41,15 @@ export const categoryApi = baseApi.injectEndpoints({
       invalidatesTags: [tagTypes.category],
     }),
 
-
-
+    // update category
+    updateCategory: build.mutation({
+      query: ({ id, ...payload }) => ({
+        url: `${CATEGORY_URL}/${id}`,
+        method: "PATCH",
+        data: payload,
+      }),
+      invalidatesTags: [tagTypes.category],
+    }),
 
     addQuizScore: build.mutation({
       query: (payload) => ({
@@ -76,6 +83,7 @@ export const {
   useCategoriesQuery,
   useCategoryQuery,
   useDeleteCategoryMutation,
+  useUpdateCategoryMutation,
 
   useAddQuizScoreMutation,
   useScoresQuery,
