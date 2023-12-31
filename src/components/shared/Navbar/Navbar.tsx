@@ -38,7 +38,7 @@ const Navbar = () => {
                       </span>
                     </Link>
                   ))}
-                  Lo
+                  
                 </div>
               </div>
               <div className="flex flex-1 items-center justify-center px-2 lg:ml-6 lg:justify-end">

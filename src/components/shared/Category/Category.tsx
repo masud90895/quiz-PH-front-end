@@ -1,6 +1,17 @@
+import config from "@/config/config";
+import Link from "next/link";
 import React from "react";
 
-const Category = () => {
+// fetch category
+async function fetchCategory() {
+  const res = await fetch(`${config.apiBaseUrl}/category/dropdown`);
+  const data = await res.json();
+  return data;
+}
+
+const Category = async () => {
+  const categories = await fetchCategory();
+
   return (
     <section className="my-[50px]">
       <div className="common ">
@@ -25,13 +36,27 @@ const Category = () => {
           </div>
         </div>
         {/* <!-- Features Div --> */}
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-8 md:grid-cols-3 lg:gap-12">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-8 md:grid-cols-3 lg:grid-cols-4">
           {/* <!-- Feature Item --> */}
-          <div className="relative mb-8 flex flex-col rounded-2xl border border-solid border-blue-600 p-2  [box-shadow:#1D4ED8_4px_4px] hover:shadow-none lg:mb-4 transition-all duration-500 ease-in-out  ">
-            <span className="text-[14px] font-semibold text-center">
-              Support
-            </span>
-          </div>
+          {categories?.data?.map(
+            (
+              category: {
+                id: number;
+                name: string;
+              },
+              i: number
+            ) => (
+              <Link
+                href={`/category/${category.id}`}
+                key={i}
+                className="relative flex flex-col rounded-2xl border border-solid border-blue-600 p-2  [box-shadow:#1D4ED8_4px_4px] hover:shadow-none lg:mb-4 transition-all duration-500 ease-in-out  "
+              >
+                <span className="text-[14px] font-semibold text-center">
+                  {category.name}
+                </span>
+              </Link>
+            )
+          )}
 
           {/* <!-- Feature Item End --> */}
         </div>
