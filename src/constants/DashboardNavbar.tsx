@@ -1,7 +1,8 @@
 import { FaHome } from "react-icons/fa";
-import { BiSolidCategory, BiSolidCategoryAlt } from "react-icons/bi";
-import { MdQuiz } from "react-icons/md";
+import { BiSolidCategory } from "react-icons/bi";
+
 import { GiWideArrowDunk } from "react-icons/gi";
+import { FaPersonCircleQuestion } from "react-icons/fa6";
 
 export const DashboardNavbarList: {
   id: number;
@@ -23,20 +24,14 @@ export const DashboardNavbarList: {
   },
   {
     id: 3,
-    title: "Create Category",
-    icon: BiSolidCategoryAlt,
-    link: "/dashboard/create-category",
-  },
-  {
-    id: 4,
-    title: "Create Quiz",
-    icon: MdQuiz,
-    link: "/dashboard/create-quiz",
-  },
-  {
-    id: 5,
     title: "Quiz List",
     icon: GiWideArrowDunk,
     link: "/dashboard/quiz-list",
+  },
+  {
+    id: 4,
+    title: "Question",
+    icon: FaPersonCircleQuestion,
+    link: "/dashboard/question-list",
   },
 ];
