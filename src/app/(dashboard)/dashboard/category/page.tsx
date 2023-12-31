@@ -111,7 +111,8 @@ const CategoryList = () => {
   };
 
   // edit category
-  const [updateCategory] = useUpdateCategoryMutation();
+  const [updateCategory, { isLoading: updateLoading }] =
+    useUpdateCategoryMutation();
 
   const handleEdit = async (id: number) => {
     const findData = data?.find((item: any) => item.id === id);
@@ -213,7 +214,7 @@ const CategoryList = () => {
             />
 
             <div className="flex justify-end mt-[8px]">
-              {isCreating ? (
+              {updateLoading ? (
                 <LoadingButton />
               ) : (
                 <button

@@ -32,10 +32,10 @@ export const quizApi = baseApi.injectEndpoints({
     }),
     // quiz quiz
     updateQuiz: build.mutation({
-      query: (payload) => ({
-        url: `${quiz_url}/${payload.id}`,
+      query: ({ id, ...payload }) => ({
+        url: `${quiz_url}/${id}`,
         method: "PATCH",
-        data: payload.data,
+        data: payload,
       }),
       invalidatesTags: [tagTypes.quiz],
     }),

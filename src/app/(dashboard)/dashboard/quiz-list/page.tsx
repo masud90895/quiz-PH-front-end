@@ -14,6 +14,7 @@ import {
   useCreateQuizMutation,
   useDeleteQuizMutation,
   useQuizzesQuery,
+  useUpdateQuizMutation,
 } from "@/redux/api/quizApi";
 import { getUserDataFromLC } from "@/utils/local-storage";
 import React from "react";
@@ -136,26 +137,29 @@ const QuizList = () => {
   };
 
   // edit category
-  const [updateCategory] = useUpdateCategoryMutation();
+  const [updateQuiz, { isLoading: updateLoading }] = useUpdateQuizMutation();
 
   const handleEdit = async (id: number) => {
-    const findData = data?.find((item: any) => item.id === id);
-    if (findData) {
-      setEditData(findData);
-      setIsEdit(true);
-    }
+    setEditData(id);
+    setIsEdit(true);
   };
 
   const onEditSubmit = async (data: any) => {
-    data.id = editData.id;
+    const datas = {
+      id: editData,
+      title: data.title,
+      categoryId: data.category.id,
+      createdById: user!.userId,
+    };
+
     try {
-      const res = await updateCategory(data).unwrap();
+      const res = await updateQuiz(datas).unwrap();
 
       if (res) {
         Swal.fire({
           position: "top-end",
           icon: "success",
-          title: "Category Updated Successfully",
+          title: "Quiz Updated Successfully",
           showConfirmButton: false,
           timer: 1500,
         });
@@ -249,16 +253,33 @@ const QuizList = () => {
             className="mt-[8px] h-[300px]"
           >
             <InputField
-              label="Name"
-              placeholder="Enter Name"
+              label="Title"
+              placeholder="Enter Title"
               register={register}
-              name="name"
+              name="title"
               errors={errors.name}
               defaultValue={editData?.name}
             />
 
+            <div>
+              <label className="my-1 inline-block text-xs font-medium uppercase text-gray-700">
+                Category
+              </label>
+
+              <ReactMultiSelect
+                isMulti={false}
+                placeholder="Select Category"
+                setValue={setValue}
+                name="category"
+                options={quizzes?.map((item: any) => ({
+                  label: item?.name,
+                  value: item?.id,
+                }))}
+              />
+            </div>
+
             <div className="flex justify-end mt-[8px]">
-              {isCreating ? (
+              {updateLoading ? (
                 <LoadingButton />
               ) : (
                 <button
