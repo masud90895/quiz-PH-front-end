@@ -3,6 +3,7 @@ import LoadingButton from "@/components/Button/LoadingButton";
 import InputField from "@/components/InputField/InputField";
 import Logo from "@/components/shared/Logo/Logo";
 import { useUserSingUpMutation } from "@/redux/api/authApi";
+import { setToLocalStorage } from "@/utils/local-storage";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React from "react";
@@ -27,6 +28,7 @@ const Register = () => {
       console.log(res);
       if (res?.newUser && res?.accessToken) {
         toast.success("User created successfully");
+        setToLocalStorage("token", res?.accessToken);
         router.push("/");
       }
     } catch (error: any) {

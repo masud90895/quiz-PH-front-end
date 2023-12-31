@@ -4,17 +4,27 @@ import { Fragment } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { FaBars, FaBarsStaggered, FaMagnifyingGlass } from "react-icons/fa6";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { NavList } from "@/constants/NavList";
 import Link from "next/link";
 import Logo from "../Logo/Logo";
+import { getUserDataFromLC, logout } from "@/utils/local-storage";
 
 const Navbar = () => {
   // get current path
   const pathname = usePathname();
+  const router = useRouter();
 
   // is user logged in?
-  const isLoggedIn = false;
+  // const isLoggedIn = false;
+
+  const isLoggedIn = getUserDataFromLC();
+  console.log("🚀 ~ file: Navbar.tsx:21 ~ Navbar ~ isLoggedIn:", isLoggedIn);
+
+  const handleLogout = async () => {
+    await logout();
+    await router.push("/login");
+  };
 
   return (
     <Disclosure as="nav" className="bg-white shadow">
@@ -38,7 +48,6 @@ const Navbar = () => {
                       </span>
                     </Link>
                   ))}
-                  
                 </div>
               </div>
               <div className="flex flex-1 items-center justify-center px-2 lg:ml-6 lg:justify-end">
@@ -88,7 +97,7 @@ const Navbar = () => {
                         <span className="sr-only">Open user menu</span>
                         <Image
                           className="h-8 w-8 rounded-full"
-                          src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                          src="https://i.ibb.co/k53Qz5y/png-transparent-avatar-user-computer-icons-software-developer-avatar-child-face-heroes-thumbnail.png"
                           alt=""
                           width={100}
                           height={100}
@@ -131,14 +140,14 @@ const Navbar = () => {
                         </Menu.Item>
                         <Menu.Item>
                           {({ active }) => (
-                            <a
-                              href="#"
+                            <button
+                              onClick={handleLogout}
                               className={
-                                "block px-4 py-2 text-sm text-gray-700"
+                                "block px-4 py-2 text-sm text-gray-700 hover:bg-red-600 hover:text-white w-full transition-all duration-500 ease-in-out text-left"
                               }
                             >
                               Sign out
-                            </a>
+                            </button>
                           )}
                         </Menu.Item>
                       </Menu.Items>

@@ -1,18 +1,36 @@
 "use client";
+import LoadingButton from "@/components/Button/LoadingButton";
 import InputField from "@/components/InputField/InputField";
 import Logo from "@/components/shared/Logo/Logo";
+import { useUserSingInMutation } from "@/redux/api/authApi";
+import { setToLocalStorage } from "@/utils/local-storage";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import React from "react";
 import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 
 const Login = () => {
+  const [userSingIn, { isLoading }] = useUserSingInMutation();
+  const router = useRouter();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const onSubmit = (data: any) => {
-    console.log(data);
+  const onSubmit = async (data: any) => {
+    try {
+      const res = await userSingIn(data).unwrap();
+      console.log(res);
+      if (res?.accessToken) {
+        toast.success("User logged in successfully");
+        setToLocalStorage("token", res?.accessToken);
+        router.push("/");
+      }
+    } catch (error: any) {
+      console.log(error);
+      toast.error(error);
+    }
   };
 
   return (
@@ -151,12 +169,16 @@ const Login = () => {
                 </a>
               </div>
               <div className="mb-4">
-                <button
-                  className="grid w-full cursor-pointer select-none rounded-md border border-blue-500 bg-blue-500 py-2 px-5 text-center align-middle text-sm text-white shadow hover:border-blue-600 hover:bg-blue-600 hover:text-white focus:border-blue-600 focus:bg-blue-600 focus:text-white focus:shadow-none"
-                  type="submit"
-                >
-                  Sign in
-                </button>
+                {isLoading ? (
+                  <LoadingButton />
+                ) : (
+                  <button
+                    className="grid w-full cursor-pointer select-none rounded-md border border-blue-500 bg-blue-500 py-2 px-5 text-center align-middle text-sm text-white shadow hover:border-blue-600 hover:bg-blue-600 hover:text-white focus:border-blue-600 focus:bg-blue-600 focus:text-white focus:shadow-none"
+                    type="submit"
+                  >
+                    Sign in
+                  </button>
+                )}
               </div>
             </form>
 
