@@ -15,6 +15,7 @@ interface InputFieldProps {
   disabled?: boolean;
   defaultValue?: any;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  validation?: any;
 }
 
 const InputField = ({
@@ -30,6 +31,7 @@ const InputField = ({
   disabled,
   defaultValue,
   onChange,
+  validation,
 }: InputFieldProps) => {
   return (
     <div className="w-full">
@@ -64,6 +66,7 @@ const InputField = ({
           }`}
           {...register(name ? name : "noName", {
             required: required ? true : false,
+            ...validation,
           })}
         />
       ) : (
