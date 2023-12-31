@@ -1,7 +1,9 @@
+import Link from "next/link";
 import React from "react";
 
 type QuizCardProps = {
   quiz: {
+    categoryId: string;
     title: string;
     category: { name: string };
     questions: [];
@@ -87,8 +89,8 @@ const QuizCard = ({ quiz }: QuizCardProps) => {
         {/* total question */}
         <p className="mb-[8px]"> Questions: {quiz?.questions?.length}</p>
         {/* quiz image */}
-        <button
-          disabled={quiz?.questions?.length === 0}
+        <Link
+          href={`/quizzes/${quiz?.categoryId}`}
           className={
             "group flex w-full cursor-pointer items-center justify-center rounded-md bg-blue-700 px-6 py-2 text-white transition"
           }
@@ -111,7 +113,7 @@ const QuizCard = ({ quiz }: QuizCardProps) => {
               d="M14 5l7 7m0 0l-7 7m7-7H3"
             />
           </svg>
-        </button>
+        </Link>
       </div>
     </div>
   );
