@@ -12,7 +12,6 @@ const Quizzes = () => {
 
   if (isLoading) return <Loader />;
 
-  console.log("🚀 ~ file: page.tsx:10 ~ Quizzes ~ data:", data);
   return (
     <div className="common">
       <div
