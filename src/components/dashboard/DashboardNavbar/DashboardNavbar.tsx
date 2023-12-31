@@ -1,5 +1,5 @@
 "use client";
-import { getUserDataFromLC, logout } from "@/utils/local-storage";
+import {  logout } from "@/utils/local-storage";
 import { Menu, Transition } from "@headlessui/react";
 import Image from "next/image";
 import Link from "next/link";
@@ -8,7 +8,7 @@ import React, { Fragment } from "react";
 
 const DashboardNavbar = () => {
   const router = useRouter();
-  const isLoggedIn = getUserDataFromLC();
+  
 
   const handleLogout = async () => {
     await logout();

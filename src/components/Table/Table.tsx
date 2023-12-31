@@ -110,10 +110,10 @@ const Table = ({
         </div>
         {/* header end */}
         {/* table start */}
-        <div className="mt-6 overflow-hidden rounded-xl bg-white px-6 shadow lg:px-4">
+        <div className="mt-6  rounded-xl bg-white px-6 shadow lg:px-4">
           <table className="min-w-full border-collapse border-spacing-y-2 border-spacing-x-2">
             {/* table header */}
-            <thead className="hidden border-b lg:table-header-group">
+            <thead className=" border-b table-header-group">
               <tr className="">
                 {tableHeader.map((item) => (
                   <td
@@ -132,7 +132,7 @@ const Table = ({
             {/* table header end */}
             {/* table body */}
 
-            <tbody className="bg-white lg:border-gray-300">
+            <tbody className="bg-white border-gray-300">
               {isLoading ? (
                 <iframe
                   src="https://giphy.com/embed/ZO9b1ntYVJmjZlsWlm"
@@ -153,7 +153,7 @@ const Table = ({
                       </td>
                     ))}
 
-                    <td className="whitespace-no-wrap  py-4 text-sm font-normal hidden text-gray-600 sm:px-3 lg:table-cell md:flex items-center gap-3  ">
+                    <td className="whitespace-no-wrap  py-4 text-sm font-normal  text-gray-600 sm:px-3 lg:table-cell flex items-center gap-3  ">
                       <button
                         onClick={() => editHandler && editHandler(item?.id)}
                         className="text-[26px] border p-2 mr-2 rounded-lg hover:bg-blue-600 hover:text-white"

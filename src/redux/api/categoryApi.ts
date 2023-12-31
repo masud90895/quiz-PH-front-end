@@ -32,6 +32,18 @@ export const categoryApi = baseApi.injectEndpoints({
     }),
     // score api
 
+    // delete category
+    deleteCategory: build.mutation({
+      query: (id) => ({
+        url: `${CATEGORY_URL}/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: [tagTypes.category],
+    }),
+
+
+
+
     addQuizScore: build.mutation({
       query: (payload) => ({
         url: `/score`,
@@ -63,6 +75,7 @@ export const {
   useCreateCategoryMutation,
   useCategoriesQuery,
   useCategoryQuery,
+  useDeleteCategoryMutation,
 
   useAddQuizScoreMutation,
   useScoresQuery,

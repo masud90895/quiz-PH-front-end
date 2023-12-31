@@ -12,10 +12,7 @@ const DashboardSidebar = () => {
   const user: IUser | null = getUserDataFromLC();
 
   const pathName = usePathname();
-  console.log(
-    "🚀 ~ file: DashboardSidebar.tsx:13 ~ DashboardSidebar ~ pathName:",
-    pathName
-  );
+
 
   return (
     <aside className="fixed z-50 md:relative">
