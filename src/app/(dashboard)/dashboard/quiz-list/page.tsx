@@ -1,6 +1,7 @@
 "use client";
 import LoadingButton from "@/components/Button/LoadingButton";
 import InputField from "@/components/InputField/InputField";
+import ReactMultiSelect from "@/components/ReactMultiSelect/ReactMultiSelect";
 import Table from "@/components/Table/Table";
 import Modal from "@/components/modal/Modal";
 import {
@@ -9,19 +10,29 @@ import {
   useDeleteCategoryMutation,
   useUpdateCategoryMutation,
 } from "@/redux/api/categoryApi";
+import {
+  useCreateQuizMutation,
+  useDeleteQuizMutation,
+  useQuizzesQuery,
+} from "@/redux/api/quizApi";
+import { getUserDataFromLC } from "@/utils/local-storage";
 import React from "react";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 
 const QuizList = () => {
+  // get quizzes
+  const { data, isLoading } = useQuizzesQuery(undefined);
   // get categories
-  const { data, isLoading } = useCategoriesQuery(undefined);
-  // create category
-  const [createCategory, { isLoading: isCreating }] =
-    useCreateCategoryMutation();
+  const { data: quizzes } = useCategoriesQuery(undefined);
+
+  // create quiz
+  const [createQuiz, { isLoading: isCreating }] = useCreateQuizMutation();
+  // get user data
+  const user = getUserDataFromLC();
 
   // delete category
-  const [deleteCategory] = useDeleteCategoryMutation();
+  const [deleteQuiz] = useDeleteQuizMutation();
 
   const [isCreated, setIsCreated] = React.useState(false);
   const [isEdit, setIsEdit] = React.useState(false);
@@ -29,13 +40,19 @@ const QuizList = () => {
 
   const tableHeader = [
     { id: 1, title: "id" },
-    { id: 2, title: "name" },
-    { id: 3, title: "Available Quiz " },
+    { id: 2, title: "Title" },
+    { id: 3, title: "Category" },
+    { id: 4, title: "Questions" },
   ];
 
   const tableData = data?.map((item: any, i: number) => ({
     id: item.id,
-    rowData: [i + 1, item?.name, item?.quiz?.length],
+    rowData: [
+      i + 1,
+      item?.title,
+      item?.category?.name,
+      item?.questions?.length,
+    ],
   }));
 
   // form
@@ -45,17 +62,25 @@ const QuizList = () => {
     handleSubmit,
     formState: { errors },
     reset,
+    setValue,
   } = useForm();
 
+  // create
   const onSubmit = async (data: any) => {
+    const datas = {
+      title: data.title,
+      categoryId: data.category.id,
+      createdById: user!.userId,
+    };
+
     try {
-      const res = await createCategory(data).unwrap();
+      const res = await createQuiz(datas).unwrap();
 
       if (res) {
         Swal.fire({
           position: "top-end",
           icon: "success",
-          title: "Category Created Successfully",
+          title: "Quiz Created Successfully",
           showConfirmButton: false,
           timer: 1500,
         });
@@ -87,13 +112,13 @@ const QuizList = () => {
         confirmButtonText: "Yes, delete it!",
       }).then(async (result) => {
         if (result.isConfirmed) {
-          const res = await deleteCategory(id).unwrap();
+          const res = await deleteQuiz(id).unwrap();
 
           if (res) {
             Swal.fire({
               position: "top-end",
               icon: "success",
-              title: "Category Deleted Successfully",
+              title: "Quiz Deleted Successfully",
               showConfirmButton: false,
               timer: 1500,
             });
@@ -151,7 +176,7 @@ const QuizList = () => {
   return (
     <>
       <Table
-        title="Category List"
+        title="Quiz List"
         tableHeader={tableHeader}
         tableData={tableData}
         isLoading={isLoading}
@@ -166,16 +191,33 @@ const QuizList = () => {
             setIsCreated(false);
           }}
           isOpen={isCreated}
-          title="Create Category"
+          title="Create Quiz"
         >
           <form onSubmit={handleSubmit(onSubmit)} className="mt-[8px]">
             <InputField
-              label="Name"
-              placeholder="Enter Name"
+              label="Title"
+              placeholder="Enter Title"
               register={register}
-              name="name"
+              name="title"
               errors={errors.name}
             />
+
+            <div>
+              <label className="my-1 inline-block text-xs font-medium uppercase text-gray-700">
+                Category
+              </label>
+
+              <ReactMultiSelect
+                isMulti={false}
+                placeholder="Select Category"
+                setValue={setValue}
+                name="category"
+                options={quizzes?.map((item: any) => ({
+                  label: item?.name,
+                  value: item?.id,
+                }))}
+              />
+            </div>
 
             <div className="flex justify-end mt-[8px]">
               {isCreating ? (
@@ -202,7 +244,10 @@ const QuizList = () => {
           isOpen={isEdit}
           title="Edit Category"
         >
-          <form onSubmit={handleSubmit(onEditSubmit)} className="mt-[8px]">
+          <form
+            onSubmit={handleSubmit(onEditSubmit)}
+            className="mt-[8px] h-[300px]"
+          >
             <InputField
               label="Name"
               placeholder="Enter Name"

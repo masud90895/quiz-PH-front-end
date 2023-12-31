@@ -36,7 +36,7 @@ const Modal = ({ isOpen, closeModal, title, children }: Props) => {
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <Dialog.Panel className="w-full max-w-4xl transform overflow-hidden rounded-lg bg-white p-3 text-left align-middle shadow-lg transition-all">
+              <Dialog.Panel className="w-full max-w-4xl min-h-[400px] transform overflow-hidden rounded-lg bg-white p-3 text-left align-middle shadow-lg transition-all">
                 {/* header */}
 
                 <div className="flex justify-between items-center">
