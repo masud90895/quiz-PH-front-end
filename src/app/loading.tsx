@@ -6,8 +6,8 @@ const Loader = () => {
       src="https://giphy.com/embed/ZO9b1ntYVJmjZlsWlm"
       width="480"
       height="360"
-      className="giphy-embed common h-screen"
-      allowFullScreen
+      className=" common h-screen"
+      frameBorder="0"
     ></iframe>
   );
 };
