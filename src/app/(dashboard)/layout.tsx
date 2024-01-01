@@ -1,20 +1,34 @@
+"use client";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import DashboardNavbar from "@/components/dashboard/DashboardNavbar/DashboardNavbar";
 import DashboardSidebar from "@/components/dashboard/DashboardSidebar/DashboardSidebar";
+import { getUserDataFromLC } from "@/utils/local-storage";
+import Swal from "sweetalert2";
+import { useRouter } from "next/navigation";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export const metadata: Metadata = {
-  title: "Dashboard-Quizzes",
-  description: "Quizzes is a quiz app built with Next.js and TypeScript.",
-};
+
 
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const user: any = getUserDataFromLC();
+  const router = useRouter();
+
+  if (!user && user?.role !== "admin" && typeof window !== "undefined") {
+    Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: "You are not authorized to access this page!",
+    });
+
+    return router.push("/login");
+  }
+
   return (
     <html lang="en">
       <body className={inter.className}>

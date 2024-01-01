@@ -19,7 +19,6 @@ const Navbar = () => {
   // const isLoggedIn = false;
 
   const isLoggedIn = getUserDataFromLC();
-  
 
   const handleLogout = async () => {
     await logout();
@@ -171,7 +170,7 @@ const Navbar = () => {
                 </div>
               ) : (
                 <Link href="/login" className="hidden md:block">
-                  <span className="rounded-full border-2 border-blue-600 px-6 py-1 text-blue-600 transition-colors hover:bg-blue-600 hover:text-white">
+                  <span className="rounded-full border-2 border-blue-600 px-6 py-1 text-blue-600  hover:bg-blue-600 hover:text-white">
                     Login
                   </span>
                 </Link>
@@ -228,7 +227,11 @@ const Navbar = () => {
               <div className="border-t border-gray-200 my-1  w-full">
                 <div className=" space-y-1">
                   <Link href="/login" className="block md:hidden w-full">
-                    <span className="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-400 w-full">
+                    <span
+                      
+                      id="login"
+                      className="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md text-white !bg-blue-600 !hover:bg-blue-400 w-full "
+                    >
                       Login
                     </span>
                   </Link>

@@ -132,6 +132,7 @@ const Login = () => {
                   name="email"
                   placeholder="Enter your email or username"
                   type="email"
+                  defaultValue={"admin@admin.com"}
                   register={register}
                   errors={errors}
                   required
@@ -144,6 +145,7 @@ const Login = () => {
                   name="password"
                   placeholder="Enter your password"
                   type="password"
+                  defaultValue={"Mf123456789@"}
                   register={register}
                   errors={errors}
                   required
