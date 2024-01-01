@@ -106,6 +106,7 @@ const QuestionList = () => {
         });
 
         setIsCreated(false);
+        setSearchTag([]);
         reset();
       }
     } catch (error) {
@@ -197,6 +198,7 @@ const QuestionList = () => {
         });
 
         setIsEdit(false);
+        setSearchTag([]);
         reset();
       }
     } catch (error) {

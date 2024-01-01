@@ -57,7 +57,7 @@ const LeaderBoard = () => {
                 className="flex justify-between hover:bg-blue-500 hover:text-white items-center px-5 py-2 border  my-2 rounded-lg border-blue-200 text-gray-600"
               >
                 <div className="w-1/4">
-                  <span className="mr-2 font-bold">{index + 1}</span>{" "}
+                  <span className="mr-2 font-bold">{index + 2}</span>{" "}
                   {item?.user?.name}
                 </div>
                 <div className="w-1/4">{item.score}</div>

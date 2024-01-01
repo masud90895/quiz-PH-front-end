@@ -9,6 +9,7 @@ import Swal from "sweetalert2";
 
 const QuizPage = ({ params }: any) => {
   const { data, isLoading } = useQuizQuery(params.id);
+
   const router = useRouter();
 
   if (isLoading) return <Loader />;
@@ -27,7 +28,13 @@ const QuizPage = ({ params }: any) => {
 
   return (
     <div className="common">
-      <QuizForm quiz={data} />{" "}
+      {data?.questions?.length !== 0 ? (
+        <QuizForm quiz={data} />
+      ) : (
+        <h1 className="my-16 text-center text-xl font-semibold">
+          No Question Found
+        </h1>
+      )}{" "}
     </div>
   );
 };
