@@ -6,17 +6,14 @@ import ReactMultiSelect from "@/components/ReactMultiSelect/ReactMultiSelect";
 import Table from "@/components/Table/Table";
 import Modal from "@/components/modal/Modal";
 import {
-  useCreateQuizMutation,
   useCreateQuizQuestionMutation,
-  useDeleteQuizMutation,
   useDeleteQuizQuestionMutation,
   useGetAllQuestionsQuery,
   useQuizzesQuery,
-  useUpdateQuizMutation,
   useUpdateQuizQuestionMutation,
 } from "@/redux/api/quizApi";
 import { getUserDataFromLC } from "@/utils/local-storage";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 
@@ -71,7 +68,8 @@ const QuestionList = () => {
   // create
 
   // search tag
-  const [searchTag, setSearchTag] = React.useState<any>([]);
+  const [searchTag, setSearchTag] = useState<any[]>([]);
+  console.log("🚀 ~ file: page.tsx:72 ~ QuestionList ~ searchTag:", searchTag);
   const [inputValue, setInputValue] = React.useState("");
   const handleDeleteOption = (value: any) => {
     setSearchTag(searchTag.filter((vt: any) => vt !== value));
@@ -212,7 +210,9 @@ const QuestionList = () => {
   };
 
   useEffect(() => {
-    setSearchTag(editData?.options);
+    if (editData?.options) {
+      setSearchTag(editData?.options);
+    }
   }, [editData?.options]);
 
   return (
@@ -272,7 +272,7 @@ const QuestionList = () => {
               <MultiSelectTextInput
                 inputValue={inputValue}
                 setInputValue={setInputValue}
-                // value={value}
+                // value={searchTag}
                 setValue={setSearchTag}
                 placeholder={"Inter Options Value"}
               />

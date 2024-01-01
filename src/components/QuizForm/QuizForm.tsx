@@ -267,7 +267,7 @@ const QuizForm = ({ quiz }: any) => {
             <Button
               className="col-span-3 bg-blue-600 hover:bg-blue-900"
               onClick={() => {
-                router.push("/leader-board");
+                router.push("/leaderboard");
               }}
             >
               Leader Board

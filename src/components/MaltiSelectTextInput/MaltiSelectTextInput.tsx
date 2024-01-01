@@ -6,9 +6,7 @@ const components = {
   DropdownIndicator: null,
 };
 
-
-
-const createOption = (label: string) => (label);
+const createOption = (label: string) => label;
 
 type FormType = {
   inputValue: any;
@@ -34,7 +32,8 @@ const MultiSelectTextInput = ({
     switch (event.key) {
       case "Enter":
       case "Tab":
-        setValue((prev: any) => [...prev, createOption(inputValue)]);
+        setValue((prev: any) => [...prev , createOption(inputValue)]);
+       
         setInputValue("");
         event.preventDefault();
     }
