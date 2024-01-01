@@ -1,36 +1,131 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Quizzes
 
-## Getting Started
 
-First, run the development server:
+## Live Link
+
+Hosted in Vercel -> [Quizzes](https://quiz-manager-ph.vercel.app/)
+
+<!-- github link=> frontend,server -->
+
+## 📌 Github Link
+
+[Frontend](https://github.com/masud90895/quiz-PH-front-end)
+
+[Backend](https://github.com/masud90895/quiz-PH-server)
+
+<!-- overview -->
+
+## 📌 Overview
+
+This is a quiz app. Here you can create quizzes and play quizzes. You can also see the leaderboard of the quizzes.
+
+<!-- features -->
+
+## 📌 Features
+
+<!-- user auth , Role =>admin.performer-->
+
+- User Authentication
+  <!-- role -->
+  - Admin
+  - Performer
+
+<!-- Admin email password -->
+
+- Admin
+  - email: admin@admin.com
+  - password: Mf123456789@
+
+<!-- Quiz Creation and Management: Admins should be able to create quizzes by adding
+questions, answer options, and correct answers, Category(frontend, fullstack, react.js, javascript,
+etc). They should also be able to edit and delete quizzes. There will be single and multiple
+choice questions. -->
+
+- Quiz Creation and Management
+
+ - admin can create quiz
+  - admin can edit quiz
+  - admin can delete quiz
+
+<!-- Quiz Playing: Performers should be able to play quizzes. They should be able to see
+the leaderboard of the quizzes. -->
+
+- Quiz Playing
+  - Performers can play quiz
+  - Performers can see the leaderboard of the quizzes
+
+<!-- leaderboard -->
+
+- Leaderboard
+  - Performers can see the leaderboard of the quizzes
+
+<!-- tech stack -->
+
+## 📌 Tech Stack
+
+<!-- Database Integration: Use Postgresql as the database and use ORM (Prisma) -->
+
+- Database Integration
+  - Postgresql
+  - ORM (Prisma)
+  - Express.js
+
+
+- Backend
+  - Express.js
+  - Prisma
+  - Postgresql
+
+- Frontend
+  - Next.js
+  - Redux
+  - Tailwind CSS
+
+<!-- how to run -->
+
+## 📌 How to run
+
+- Clone the repository
+- Install dependencies
+- Run the server
+- Run the frontend
 
 ```bash
+git clone
+cd quiz-PH-front-end
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+```bash
+git clone
+cd quiz-PH-server
+npm install
+npm run dev
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+<!-- screenshots -->
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
-## Learn More
 
-To learn more about Next.js, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+  
+
+
+
+
+
+
+
+
+## 🔗 Social Links
+
+[![facebook](https://img.shields.io/badge/Facebook-1877F2?style=for-the-badge&logo=facebook&logoColor=white)](https://www.facebook.com/masud90895)
+[![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/mdmahafujurrahamanmasud/)
+[![twitter](https://img.shields.io/badge/twitter-1DA1F2?style=for-the-badge&logo=twitter&logoColor=white)](https://twitter.com/masud90895)
+
+## Thanks for reading this
